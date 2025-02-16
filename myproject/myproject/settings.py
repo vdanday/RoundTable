@@ -125,3 +125,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Ensure sessions are properly managed
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Default setting
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+LOGOUT_REDIRECT_URL = "/login/"
+LOGIN_REDIRECT_URL = '/'

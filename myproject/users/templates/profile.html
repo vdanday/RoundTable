@@ -1,5 +1,40 @@
-<form method="post">
+<!-- users/templates/profile.html -->
+<h2>Profile Settings</h2>
+<form method="post" id="profile-form">
     {% csrf_token %}
     {{ form.as_p }}
+
     <button type="submit">Save Profile</button>
 </form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let roleField = document.querySelector("#id_role");
+    let degreeField = document.querySelector("#id_degree").closest("p");
+    let majorField = document.querySelector("#id_major").closest("p");
+    let currentRoleField = document.querySelector("#id_current_role").closest("p");
+    let experienceField = document.querySelector("#id_experience_years").closest("p");
+
+    function toggleFields() {
+        if (roleField.value === "student") {
+            degreeField.style.display = "block";
+            majorField.style.display = "block";
+            currentRoleField.style.display = "none";
+            experienceField.style.display = "none";
+        } else if (roleField.value === "employer") {
+            degreeField.style.display = "none";
+            majorField.style.display = "none";
+            currentRoleField.style.display = "block";
+            experienceField.style.display = "block";
+        } else {
+            degreeField.style.display = "none";
+            majorField.style.display = "none";
+            currentRoleField.style.display = "none";
+            experienceField.style.display = "none";
+        }
+    }
+
+    toggleFields(); // Initial load
+    roleField.addEventListener("change", toggleFields);
+});
+</script>
