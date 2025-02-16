@@ -1,0 +1,11 @@
+<!-- users/templates/home.html -->
+{% if user.is_authenticated %}
+    <h1>Welcome, {{ user.username }}!</h1>
+    <p><a href="{% url 'profile' %}">Go to Profile</a></p>
+    <p><a href="{% url 'search' %}">Search for Skills</a></p>
+    <p><a href="{% url 'logout' %}">Logout</a></p>
+{% else %}
+    <h1>Welcome to the Home Page</h1>
+    <p><a href="{% url 'login' %}">Login</a></p>
+    <p><a href="{% url 'signup' %}">Sign Up</a></p>
+{% endif %}
