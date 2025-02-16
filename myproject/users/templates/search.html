@@ -1,4 +1,4 @@
-<form method="get">
+<!-- <form method="get">
     <input type="text" name="skill" placeholder="Enter skill">
     <button type="submit">Search</button>
 </form>
@@ -14,4 +14,34 @@
     </ul>
 {% else %}
     <p>No users found.</p>
-{% endif %}
+{% endif %} -->
+
+<!-- users/templates/search.html -->
+{% extends 'base.html' %}
+
+{% block title %}Search - SkillForge{% endblock %}
+
+{% block content %}
+    <h2>Search for a Skill</h2>
+    <form method="get" action="{% url 'search' %}">
+        <input type="text" name="skill" placeholder="Search for a skill" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if users %}
+        <h3>Results for "{{ query }}"</h3>
+        <ul>
+            {% for user in users %}
+                <li>{{ user.username }} - Mentor Score: {{ user.mentor_score }}
+                    <a href="{% url 'connect' user.id %}">Connect</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        {% if query %}
+            <p>No users found with skill "{{ query }}".</p>
+        {% else %}
+            <p>Enter a skill to search.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

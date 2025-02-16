@@ -1,17 +1,18 @@
 <!-- users/templates/home.html -->
-{% if user.is_authenticated %}
+{% extends 'base.html' %}
+
+{% block title %}Home - SkillForge{% endblock %}
+
+{% block content %}
     <h1>Welcome, {{ user.username }}!</h1>
 
-    <!-- Search bar -->
+    <!-- Search Bar -->
     <form method="get" action="{% url 'search' %}">
         <input type="text" name="skill" placeholder="Search for a skill" required>
         <button type="submit">Search</button>
     </form>
 
-    <p><a href="{% url 'profile' %}">Go to Profile</a></p>
-    <p><a href="{% url 'logout' %}">Logout</a></p>
-{% else %}
-    <h1>Welcome to the Home Page</h1>
-    <p><a href="{% url 'login' %}">Login</a></p>
-    <p><a href="{% url 'signup' %}">Sign Up</a></p>
-{% endif %}
+    <p>Your Total Score: {{ user.total_score }}</p>
+    <p>Mentor Score: {{ user.mentor_score }}</p>
+    <p>Mentee Score: {{ user.mentee_score }}</p>
+{% endblock %}
